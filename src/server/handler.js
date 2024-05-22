@@ -28,11 +28,13 @@ const postPredictHandler = async (request, h) => {
     };
 
     await storeData(id, data);
-    return {
-      status: "success",
-      message: "Model is predicted successfully",
-      data: data,
-    };
+    return h
+      .response({
+        status: "success",
+        message: "Model is predicted successfully",
+        data: data,
+      })
+      .code(201);
   } catch (error) {
     if (Boom.isBoom(error)) {
       throw error;
